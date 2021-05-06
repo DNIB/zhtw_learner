@@ -23,6 +23,7 @@ class WordToSentence extends Model
      */
     protected $fillable = [
         'sentence_id',
-        'zhtw_word_id',
+        'word_id',
+        'order',
     ];
 }

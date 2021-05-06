@@ -16,7 +16,7 @@ class CreateWordsToSentencesTable extends Migration
         Schema::create('words_to_sentences', function (Blueprint $table) {
             $table->id();
             $table->integer('sentence_id');
-            $table->integer('zhtw_word_id');
+            $table->integer('word_id');
             $table->integer('order');
             $table->timestamps();
         });

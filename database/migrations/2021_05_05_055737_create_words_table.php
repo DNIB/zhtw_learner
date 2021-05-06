@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSentencesTable extends Migration
+class CreateWordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSentencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sentences', function (Blueprint $table) {
+        Schema::create('words', function (Blueprint $table) {
             $table->id();
             $table->string('content');
             $table->string('language_id');
@@ -28,6 +28,6 @@ class CreateSentencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sentences');
+        Schema::dropIfExists('words');
     }
 }

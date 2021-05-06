@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateZhtwWordsTable extends Migration
+class CreateLanguagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateZhtwWordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('zhtw_words', function (Blueprint $table) {
+        Schema::create('languages', function (Blueprint $table) {
             $table->id();
-            $table->string('word');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateZhtwWordsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('zhtw_words');
+        Schema::dropIfExists('languages');
     }
 }
