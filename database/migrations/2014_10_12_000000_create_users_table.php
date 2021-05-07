@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('score')->default('0');
             $table->integer('rank')->default('0');
+            // 'admin', 'manager' or 'normal'
+            $table->string('auth')->default('normal');
             $table->rememberToken();
             $table->timestamps();
         });
