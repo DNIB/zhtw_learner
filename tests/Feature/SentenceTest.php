@@ -56,5 +56,32 @@ class SentenceTest extends TestCase
         $this->assertTrue( $sentence_nene->createWordOfSentence(
             ['ね','ね'], '3'
         ));
+
+        $sentence_tama = new Sentence;
+        $sentence_tama->fill([
+            'content' => 'tama',
+            'language_id' => '2',
+        ]);
+        $this->assertTrue( $sentence_tama->createWordOfSentence(
+            ['た','ま'], '3'
+        ));
+
+        $word_hello = $sentence_hello->words()->get()->toArray();
+        $word_test_result = $sentence_hello->validateWord($word_hello);
+        $this->assertTrue($word_test_result);
+
+        $word_nene = $sentence_nene->words()->get()->toArray();
+        $word_test_result = $sentence_nene->validateWord($word_nene);
+        $this->assertTrue($word_test_result);
+
+        $word_test_result = $sentence_hello->validateWord($word_nene);
+        $this->assertFalse($word_test_result);
+
+        $word_tama = $sentence_tama->words()->get()->toArray();
+        $word_test_result = $sentence_nene->validateWord($word_tama);
+        $this->assertFalse($word_test_result);
+
+        $word_test_result = $sentence_nene->validateWord([]);
+        $this->assertFalse($word_test_result);
     }
 }

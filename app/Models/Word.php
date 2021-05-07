@@ -22,6 +22,8 @@ class Word extends Model
     /**
      * Check if the word is exist when saving new word
      * If the word is not exist, saving it
+     * 
+     * @return bool
      */
     public function save(array $options = [])
     {

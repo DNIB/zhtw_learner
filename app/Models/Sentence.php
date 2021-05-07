@@ -67,11 +67,47 @@ class Sentence extends Model
     }
 
     /**
+     * Validate if the order of input Word is correct or not
+     * 
+     * @param array $words
+     * 
+     * @return bool
+     */
+    public function validateWord(array $words = [])
+    {
+        if (empty($words)) {
+            return false;
+        }
+
+        $correct_words = $this->wordIdWithOrder();
+        if (count($words) != count($correct_words)) {
+            return false;
+        }
+
+        foreach ($words as $key => $word) {
+            if ($word['id'] != $correct_words[$key]['word_id']) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Return the words of this sentence with order
+     * 
+     * @return array
+     */
+    public function wordIdWithOrder()
+    {
+        return $this->word_to_sentence()->orderBy('order', 'asc')->get('word_id')->toArray();
+    }
+
+    /**
      * Construct the one-to-many relation with WordToSentence
      * 
      * @return mixed
      */
-    public function wordsRelation()
+    public function word_to_sentence()
     {
         return $this->hasMany(
             WordToSentence::class,
@@ -105,7 +141,7 @@ class Sentence extends Model
             Word::class,
             WordToSentence::class,
             'sentence_id',
-            'zhtw_word_id',
+            'word_id',
             'id',
             'id'
         );
