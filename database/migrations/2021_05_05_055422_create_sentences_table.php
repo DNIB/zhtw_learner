@@ -15,7 +15,7 @@ class CreateSentencesTable extends Migration
     {
         Schema::create('sentences', function (Blueprint $table) {
             $table->id();
-            $table->string('content')->unique();
+            $table->string('content');
             $table->string('language_id');
             $table->timestamps();
         });
