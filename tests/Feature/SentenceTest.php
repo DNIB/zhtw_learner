@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Language;
 use App\Models\Sentence;
 use App\Models\Word;
 use App\Models\WordToSentence;
@@ -31,6 +32,7 @@ class SentenceTest extends TestCase
      */
     public function testCreate()
     {
+        // Test for creating new sentence
         $sentence_hello = new Sentence;
         $sentence_hello->fill([
             'content' => 'Hello from the other side',
@@ -66,6 +68,7 @@ class SentenceTest extends TestCase
             ['た','ま'], '3'
         ));
 
+        // Test for validate words
         $word_hello = $sentence_hello->words()->get()->toArray();
         $word_test_result = $sentence_hello->validateWord($word_hello);
         $this->assertTrue($word_test_result);
@@ -83,5 +86,15 @@ class SentenceTest extends TestCase
 
         $word_test_result = $sentence_nene->validateWord([]);
         $this->assertFalse($word_test_result);
+
+        // Test for Creating Words for Exam
+        $exam_word_hello = $sentence_hello->createWordsForExam();
+        $this->assertTrue( count($exam_word_hello) == count($word_hello) );
+
+        // Test for Language relation
+        $language_id = $sentence_hello->language_id;
+        $language = Language::find($language_id)->name;
+        $language_diff = $sentence_hello->language->name;
+        $this->assertTrue( $language == $language_diff );
     }
 }

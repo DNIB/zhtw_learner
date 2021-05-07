@@ -27,6 +27,37 @@ class Sentence extends Model
     ];
 
     /**
+     * Return the array of words for exam
+     * 
+     * @return array
+     */
+    public function createWordsForExam()
+    {
+        $words = $this->words()->get()->toArray();
+        return $this->rearrangeWords($words);
+    }
+
+    /**
+     * Rearrange the array of words
+     * 
+     * @param array $words
+     * @param array $ret_words
+     * 
+     * @return array
+     */
+    private function rearrangeWords(array $words, array $ret_words = [])
+    {
+        if (empty($words)) {
+            return $ret_words;
+        } else {
+            $index = random_int(0, count($words)-1);
+            $ret_words[] = $words[$index];
+            array_splice($words, $index, 1);
+            return $this->rearrangeWords($words, $ret_words);
+        }
+    }
+
+    /**
      * Create the words of this Sentence
      * 
      * @param array $words
