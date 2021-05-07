@@ -12,9 +12,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-use function PHPUnit\Framework\assertFalse;
-use function PHPUnit\Framework\assertTrue;
-
 class SentenceTest extends TestCase
 {
     use RefreshDatabase;

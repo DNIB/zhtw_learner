@@ -8,6 +8,8 @@
 ## 使用工具
 - PHP 7.4
 - Laravel 8
+- Laravel Breeze
+- Composer
 
 ## 程式要求
 - 盡可能的完善測試
