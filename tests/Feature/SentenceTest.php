@@ -6,6 +6,7 @@ use App\Models\Language;
 use App\Models\Sentence;
 use App\Models\Word;
 use App\Models\WordToSentence;
+use Database\Seeders\DatabaseSeeder;
 use Database\Seeders\Tests\SentenceTestSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -19,19 +20,15 @@ class SentenceTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Indicates whether the default seeder should run before each test.
-     *
-     * @var bool
-     */
-    protected $seed = true;
-
-    /**
      * A basic feature test example.
      *
      * @return void
      */
     public function testCreate()
     {
+        // Run seeder before start test
+        $this->seed();
+
         // Test for creating new sentence
         $sentence_hello = new Sentence;
         $sentence_hello->fill([
