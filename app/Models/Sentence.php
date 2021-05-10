@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Sentence extends Model
 {
@@ -25,6 +26,21 @@ class Sentence extends Model
         'language_id',
         'content'
     ];
+
+    /**
+     * Store user_id when saving new data
+     * 
+     * @param array $options
+     * 
+     * @return bool
+     */
+    public function save(array $options = [])
+    {
+        if( empty($this->id) ) {
+            $this->user_id = Auth::id() ? : 1; 
+        }
+        return parent::save();
+    }
 
     /**
      * Return the array of words for exam
@@ -82,7 +98,7 @@ class Sentence extends Model
             $new_word = new Word;
             $new_word->fill([
                 'content' => $word,
-                'language_id' => $this->language_id,
+                'language_id' => $language_id,
             ]);
             if (!$new_word->save()){
                 $new_word = Word::where('content', $word)->get()[0];
