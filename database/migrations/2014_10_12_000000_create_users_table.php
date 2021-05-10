@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('score')->default('0');
-            $table->integer('rank')->default('0');
+            $table->integer('rank')->default('1');
             // 'admin', 'manager' or 'normal'
             $table->string('auth')->default('normal');
             $table->rememberToken();

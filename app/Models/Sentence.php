@@ -41,7 +41,7 @@ class Sentence extends Model
         }
         return parent::save();
     }
-
+    
     /**
      * Return the array of words for exam
      * 

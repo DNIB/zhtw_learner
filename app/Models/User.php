@@ -42,6 +42,44 @@ class User extends Authenticatable
     ];
 
     /**
+     * Return a sentence that fit user's rank
+     * 
+     * @return App\Models\Sentence | bool
+     */
+    public function getExamSentence()
+    {
+        $incompleted_sentences = $this->getSentenceIncompleted();
+        if (empty($incompleted_sentences)) {
+            return false;
+        }
+
+        $index = random_int(0, count($incompleted_sentences)-1);
+        return $incompleted_sentences[$index];
+    }
+
+    /**
+     * Return a sentence that fit user's rank
+     * 
+     * @return array
+     */
+    private function getSentenceIncompleted()
+    {
+        $sentences = Sentence::where('rank', $this->rank)->get();
+        $completed_sentences = $this->completed_sentences();
+        $incompleted_sentences = [];
+
+        foreach ($sentences as $sentence) {
+            $isIncompleted = empty($completed_sentences->where('sentence_id', $sentence->id)->first());
+            if ($isIncompleted) {
+                $incompleted_sentences[] = $sentence;
+            }
+        
+        }
+        return $incompleted_sentences;
+    }
+
+
+    /**
      * Construct the many-to-many relation with Sentence
      * 
      * @return mixed

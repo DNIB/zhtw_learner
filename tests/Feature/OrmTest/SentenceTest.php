@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Language;
 use App\Models\Sentence;
+use App\Models\User;
 use App\Models\Word;
 use App\Models\WordToSentence;
 use Database\Seeders\DatabaseSeeder;
@@ -90,5 +91,14 @@ class SentenceTest extends TestCase
         $language = Language::find($language_id)->name;
         $language_diff = $sentence_hello->language->name;
         $this->assertTrue( $language == $language_diff );
+
+        // Test Get a Sentence whick is incompleted
+        $user = User::first();
+        $sentence = $user->getExamSentence();
+        $this->assertFalse($sentence === false);
+
+        $user = User::orderBy('id', 'desc')->first();
+        $sentence = $user->getExamSentence();
+        $this->assertTrue($sentence === false);
     }
 }

@@ -18,6 +18,7 @@ class CreateSentencesTable extends Migration
             $table->string('content');
             $table->string('language_id');
             $table->integer('user_id');
+            $table->integer('rank')->default('1');
             $table->timestamps();
         });
     }
