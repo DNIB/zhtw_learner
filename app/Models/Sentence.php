@@ -177,4 +177,21 @@ class Sentence extends Model
             'id'
         );
     }
+
+    /**
+     * Construct the many-to-many relation with User
+     * 
+     * @return mixed
+     */
+    public function completed_users()
+    {
+        return $this->belongsToMany(
+            User::class,
+            CompletedSentence::class,
+            'sentence_id',
+            'user_id',
+            'id',
+            'id'
+        );
+    }
 }

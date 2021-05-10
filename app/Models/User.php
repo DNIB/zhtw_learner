@@ -40,4 +40,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Construct the many-to-many relation with Sentence
+     * 
+     * @return mixed
+     */
+    public function completed_sentences()
+    {
+        return $this->belongsToMany(
+            Sentence::class,
+            CompletedSentence::class,
+            'user_id',
+            'sentence_id',
+            'id',
+            'id'
+        );
+    }
 }
