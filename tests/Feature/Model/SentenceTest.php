@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Model;
 
 use App\Models\Language;
 use App\Models\Sentence;

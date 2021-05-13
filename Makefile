@@ -25,6 +25,12 @@ service.up:
 service.build:
 	php artisan serve --host 127.0.0.1 --port 8060
 
+# Build and Start
+.PHONY: service.run
+service.run:
+	make service.up
+	make service.build
+
 # Run test.
 .PHONY: test
 test:
